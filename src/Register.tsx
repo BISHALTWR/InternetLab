@@ -91,7 +91,7 @@ const Register: React.FC<RegisterProps> = () => {
                         </button>
                     </div>
                 </form>
-                <h3 className='d-flex justify-content-center align-items-center'><a href="/">Login</a></h3>
+                <h3 className='d-flex justify-content-center align-items-center'><a href="#/">Login</a></h3>
             </div>
         </div>
     );
