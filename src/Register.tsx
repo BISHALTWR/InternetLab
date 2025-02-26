@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { auth, db } from './firebase';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate , useLocation} from 'react-router-dom';
 import {doc, setDoc } from 'firebase/firestore';
 
 interface RegisterProps { }
@@ -13,6 +13,7 @@ const Register: React.FC<RegisterProps> = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMatch, setPasswordMatch] = useState<boolean>(true);
     const navigate = useNavigate()
+    const location = useLocation(); 
 
     useEffect(() => {
         const checkToken = () => {
