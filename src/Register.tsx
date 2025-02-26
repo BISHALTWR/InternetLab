@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { auth, db } from './firebase';
-import { Link, useNavigate , useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {doc, setDoc } from 'firebase/firestore';
 
 interface RegisterProps { }
@@ -13,7 +13,8 @@ const Register: React.FC<RegisterProps> = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMatch, setPasswordMatch] = useState<boolean>(true);
     const navigate = useNavigate()
-    const location = useLocation(); 
+    const location = useLocation();
+    
 
     useEffect(() => {
         const checkToken = () => {
@@ -130,7 +131,7 @@ const Register: React.FC<RegisterProps> = () => {
                         </button>
                     </div>
                 </form>
-                <h3 className='d-flex justify-content-center align-items-center'><Link to="/">Login</Link></h3>
+                <h3 className='d-flex justify-content-center align-items-center'><a href="/">Login</a></h3>
             </div>
         </div>
     );
