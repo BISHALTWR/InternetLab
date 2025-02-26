@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { auth, db } from './firebase';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 
 interface LoginProps { }
@@ -95,7 +95,7 @@ const Login: React.FC<LoginProps> = () => {
               Login
             </button>
           </div>
-          <h3 className='d-flex justify-content-center align-items-center'><a href="/register">Register</a></h3>
+          <h3 className='d-flex justify-content-center align-items-center'><Link to="/register">Register</Link></h3>
         </form>
       </div>
     </div>
