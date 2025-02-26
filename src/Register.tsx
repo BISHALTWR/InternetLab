@@ -10,6 +10,8 @@ interface RegisterProps { }
 const Register: React.FC<RegisterProps> = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [passwordMatch, setPasswordMatch] = useState<boolean>(true);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -27,6 +29,11 @@ const Register: React.FC<RegisterProps> = () => {
         checkToken()
     }, [navigate])
 
+    useEffect(() => {
+        // Check if passwords match whenever password or confirmPassword changes
+        setPasswordMatch(password === confirmPassword || confirmPassword === '');
+    }, [password, confirmPassword]);
+
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
@@ -35,7 +42,16 @@ const Register: React.FC<RegisterProps> = () => {
         setPassword(e.target.value);
     };
 
+    const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(e.target.value);
+    };
+
     const handleLogin = async () => {
+        if (password !== confirmPassword) {
+            alert("Passwords don't match!");
+            return;
+        }
+        
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
@@ -85,13 +101,36 @@ const Register: React.FC<RegisterProps> = () => {
                             onChange={handlePasswordChange}
                         />
                     </div>
+                    <div className="mb-3">
+                        <label htmlFor="confirmPassword" className="form-label">
+                            Confirm Password
+                        </label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                            className={`form-control ${!passwordMatch ? 'is-invalid' : ''}`}
+                        />
+                        {!passwordMatch && (
+                            <div className="invalid-feedback">
+                                Passwords don't match
+                            </div>
+                        )}
+                    </div>
                     <div className="text-center">
-                        <button type="button" className="btn btn-primary" onClick={handleLogin}>
+                        <button 
+                            type="button" 
+                            className="btn btn-primary" 
+                            onClick={handleLogin}
+                            disabled={!email || !password || !confirmPassword || !passwordMatch}
+                        >
                             Register
                         </button>
                     </div>
                 </form>
-                <h3 className='d-flex justify-content-center align-items-center'><a href="#/">Login</a></h3>
+                <h3 className='d-flex justify-content-center align-items-center'><a href="/">Login</a></h3>
             </div>
         </div>
     );

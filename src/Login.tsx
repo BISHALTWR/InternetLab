@@ -95,7 +95,7 @@ const Login: React.FC<LoginProps> = () => {
               Login
             </button>
           </div>
-          <h3 className='d-flex justify-content-center align-items-center'><a href="#/register">Register</a></h3>
+          <h3 className='d-flex justify-content-center align-items-center'><a href="/register">Register</a></h3>
         </form>
       </div>
     </div>
