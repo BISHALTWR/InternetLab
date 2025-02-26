@@ -107,7 +107,6 @@ const Register: React.FC<RegisterProps> = () => {
                         </label>
                         <input
                             type="password"
-                            className="form-control"
                             id="confirmPassword"
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
